@@ -55,7 +55,7 @@ fair run data/seirs_config_windows.yaml
 ```
 
 ## Fair CLI
-The (FAIR commandline interface)["https://github.com/FAIRDataPipeline/FAIR-CLI"] is available to install using pip:
+The [FAIR commandline interface]("https://github.com/FAIRDataPipeline/FAIR-CLI") is available to install using pip:
 ```
 pip install fair-cli
 ```
