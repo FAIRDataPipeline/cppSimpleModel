@@ -19,7 +19,8 @@ int main(int argc, char** argv) {
                 run_ci();                
             }
             else if (std::string(argv[1]).find("-local") != std::string::npos) {
-                if(argc == 3){
+                if(argc == 3){                    
+                    ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
                     run_local(std::string(argv[2]), "data_store/cpp_model_output.csv", "data_store/cpp_figure_output.png");
                 }
                 else if (argc != 5){
@@ -52,8 +53,6 @@ int main(int argc, char** argv) {
 void run_local(std::string initial_parameters_path,
     std::string csv_output_path,
     std::string figure_output_path){
-
-    ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
 
     seirsModel sm = seirsModel(initial_parameters_path,
     1000, 5, 0.999, 0.001, 0, 0);
