@@ -20,12 +20,15 @@ FetchContent_Declare(
     URL ${FDPAPI_URL}
 )
 FetchContent_MakeAvailable(FDPApi)
-
 SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/master.zip" )
 
 MESSAGE( STATUS "[SCIPLOT]" )
 MESSAGE( STATUS "\tSCIPLOT Will be installed." )
 MESSAGE( STATUS "\tURL: ${SCIPLOT_URL}" )
+
+set(SCIPLOT_BUILD_TESTS OFF CACHE INTERNAL "Turn off sciplot tests")
+set(SCIPLOT_BUILD_EXAMPLES OFF CACHE INTERNAL "Turn off sciplot examples")
+set(SCIPLOT_BUILD_DOCS OFF CACHE INTERNAL "Turn off sciplot docs")
 
 include(FetchContent)
 FetchContent_Declare(
