@@ -35,7 +35,6 @@ int main(int argc, char** argv) {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-        FDP::APILogger->error("Error: {0}", e.what());
         return 1;
     }
     catch (const char* msg) {
@@ -101,7 +100,6 @@ void run_ci(){
 
     datapipeline.finalise();
 
-
 }
 
 seirsModel::seirsModel(std::string inital_parameters_path,
@@ -128,7 +126,7 @@ void seirsModel::validate_initial_parameters(std::map<std::string, double> &init
     std::string current_parameter;
     while (getline(iss, current_parameter, ',')){
         if (keys.find(current_parameter) == std::string::npos) {
-            std::cout << "\nRequired parameter not found: " + current_parameter ;
+            FDP::APILogger->error("Required parameter not found: {0}", current_parameter) ;
             throw "Required parameter not found: " + current_parameter ;
         }
     }
@@ -142,7 +140,7 @@ void seirsModel::read_initial_parameters(std::string path)
 
     if (!csvFile.is_open())
     {
-        std::cout << "\nCould not open initial parameters from " + path;
+        FDP::APILogger->error("Could not open initial parameters from {0}", path);
         throw "Could not open initial parameters";
     }
 
@@ -169,7 +167,7 @@ void seirsModel::read_initial_parameters(std::string path)
             //std::cout << "\nadded value: " + kv[1] + " to: " + kv[0];
         }
         catch (...) {
-            std::cout << "\nWarning Could not read parameter on " + lineStream;
+            FDP::APILogger->warn("Warning Could not read parameter on {0}", lineStream);
         }      
     }
 
@@ -241,13 +239,13 @@ void seirsModel::run_seirs_model(){
 }
 
 void seirsModel::write_to_csv(std::string path){
-    std::cout << "\nWriting CSV to: " + path;
+    FDP::APILogger->info("Writing CSV to: {0}", path);
     std::ofstream writeCSV;
     writeCSV.open(path);
 
     writeCSV << "time, S, E, I, R\n";
 
-    std::cout << "\nTime Points: " + std::to_string(time_points_.size());
+    //std::cout << "\nTime Points: " + std::to_string(time_points_.size());
 
     for (int row = 0; row < time_points_.size() - 1; row++){
         writeCSV << time_points_[row];
@@ -263,12 +261,12 @@ void seirsModel::write_to_csv(std::string path){
     }
     writeCSV.close();
 
-    std::cout << "\nCSV Written Succesfuly";
+    FDP::APILogger->info("CSV Written Succesfuly to: {0}", path);
 
 }
 
 void seirsModel::plot_model(std::string path, bool show){
-    std::cout << "\nGenerating plot";
+    FDP::APILogger->error("Generating plot");
     sciplot::Plot plot;
 
     // Set the x and y labels
@@ -295,7 +293,7 @@ void seirsModel::plot_model(std::string path, bool show){
         fig.show();
         //plot.show();
     }
-    std::cout << "\nSaving plot to path" + path;
+    FDP::APILogger->info("Saving plot to path {0}", path);
     fig.save(path);
     //plot.save(path);
 
