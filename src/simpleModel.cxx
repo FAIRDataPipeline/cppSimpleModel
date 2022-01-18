@@ -89,6 +89,7 @@ void run_ci(){
     ghc::filesystem::path figure_output_path = datapipeline.link_write(figure_output);
 
     std::string figure_output_path_ = FDP::remove_backslash_from_path(figure_output_path.string());
+    figure_output_path_ = std::regex_replace(figure_output_path_, std::regex(std::string("-")), "_");
 
     seirsModel sm = seirsModel(initial_parameters_path.string(),
     1000, 5, 0.999, 0.001, 0, 0);
