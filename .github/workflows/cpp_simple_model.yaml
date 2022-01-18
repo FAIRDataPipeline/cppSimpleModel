@@ -55,7 +55,6 @@ jobs:
           source .venv/bin/activate
           cd ${{ github.workspace }}
           fair init --ci
-          fair registry start
           fair pull data\seirs_config.yaml
           fair run data\seirs_config.yaml
   Build_MacOS:
