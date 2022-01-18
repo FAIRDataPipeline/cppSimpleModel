@@ -1,0 +1,15 @@
+# YAML 1.2
+---
+abstract: "cppSimple Example - Simple model example for the FAIR Data Pipeline"
+authors: 
+  -
+    affiliation: University of Glasgow
+    family-names: Field
+    given-names: Ryan
+    orcid: "https://orcid.org/0000-0002-6773-1049"
+cff-version: "1.1.0"
+keywords: "FAIR", "C++", "data"
+license: "BSD-3-Clause"
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/FAIRDataPipeline/cppSimpleModel"
+title: "FAIR Data Pipeline C++ API"

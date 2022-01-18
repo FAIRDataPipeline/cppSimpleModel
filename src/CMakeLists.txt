@@ -20,7 +20,7 @@ FetchContent_Declare(
     URL ${FDPAPI_URL}
 )
 FetchContent_MakeAvailable(FDPApi)
-SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/master.zip" )
+SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/main.zip" )
 
 MESSAGE( STATUS "[SCIPLOT]" )
 MESSAGE( STATUS "\tSCIPLOT Will be installed." )

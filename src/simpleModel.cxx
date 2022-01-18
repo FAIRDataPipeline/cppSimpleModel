@@ -11,8 +11,8 @@ int main(int argc, char** argv) {
             }
             else if (std::string(argv[1]).find("h") != std::string::npos) {
                 std::cout << "Usage:\
-                \n --ci config_file_path script_file_path token\
-                \n --local initial_parameters_path csv_output_path figure_output_path";
+                \n --ci\
+                \n --local initial_parameters_path";
                 return 1;
             }
             else if (std::string(argv[1]).find("-ci") != std::string::npos) {            
@@ -31,6 +31,10 @@ int main(int argc, char** argv) {
                     run_local(std::string(argv[2]), std::string(argv[3]), std::string(argv[4]));
                 }
             }
+        }
+        else {
+            std::cout << "Please specify a switch see -h";
+            return 1;
         }
     }
     catch(const std::exception& e)
