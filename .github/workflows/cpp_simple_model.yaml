@@ -17,6 +17,7 @@ jobs:
       - name: Install graphviz
         run:  |
               sudo apt-get install graphviz
+              sudo apt-get install -y gnuplot
       - name: Install local registry
         run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
       - name: Checkout FAIRDataPipeline/FAIR-CLI
@@ -46,11 +47,6 @@ jobs:
       - name: Configure Library
         run: |
           cmake -Bbuild
-      - name: Compile cppSimpleModel
-        run: build-wrapper-linux-x86-64 --out-dir bw-outputs cmake --build build
-        env:
-          CIBuild: 1
-          BUILD_TESTS: True
       - name: Run model
         run: |
           cmake --build build
@@ -74,6 +70,7 @@ jobs:
           brew install cmake
           brew install hdf5
           brew install curl
+          brew install gnuplot
       - name: Configure Library
         run: |
           cmake -Bbuild
@@ -90,6 +87,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Install Dependencies
         run: |
+          choco install gnuplot
           choco install wget
           wget -O hdf5.zip https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.1/bin/windows/hdf5-1.12.1-Std-win10_64-vs14.zip
           tar -xf hdf5.zip
