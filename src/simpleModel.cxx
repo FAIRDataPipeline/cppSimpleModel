@@ -80,6 +80,19 @@ void run_ci(){
 
     FDP::DataPipeline datapipeline = FDP::DataPipeline(config_path.string(), script_path.string(), token);
 
+    std::string initial_parameters_path = datapipeline.link_read("SEIRS_model/parameters");
+    std::string csv_output_path = datapipeline.link_write("SEIRS_model/results/model_output/cpp");
+    std::string figure_output_path = datapipeline.link_write("SEIRS_model/results/figure/cpp");
+
+    seirsModel sm = seirsModel(initial_parameters_path,
+    1000, 5, 0.999, 0.001, 0, 0);
+    sm.run_seirs_model();
+    sm.write_to_csv(csv_output_path);
+    sm.plot_model(figure_output_path, false);
+
+    datapipeline.finalise();
+
+
 }
 
 seirsModel::seirsModel(std::string inital_parameters_path,
