@@ -1,8 +1,8 @@
 # Simple Model Example for C++
 
 ## Contents
-    - [Installation](#installation)
-    - [Usage](#usage)
+  - [Installation](#installation)
+  - [Usage](#usage)
 
 ## Installation
 The simpleModel executable can be compile using cmake, the only external dependancy not included is [gnuplot](http://www.gnuplot.info/download.html), gnuplot is required to run the executable and should be installed and the gnuplot executable available in the system path.
