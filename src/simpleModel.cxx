@@ -266,7 +266,7 @@ void seirsModel::write_to_csv(std::string path){
 }
 
 void seirsModel::plot_model(std::string path, bool show){
-    FDP::APILogger->error("Generating plot");
+    FDP::APILogger->info("Generating plot");
     sciplot::Plot plot;
 
     // Set the x and y labels
