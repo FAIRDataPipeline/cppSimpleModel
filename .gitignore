@@ -1,7 +1,8 @@
 build/
 .DS_STORE
-.vscode
+.vscode/
 .bash_profile
 test/data_store/
 .fair
 data_store/
+venv
