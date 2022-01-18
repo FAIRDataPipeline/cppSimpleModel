@@ -1,7 +1,7 @@
 run_metadata:
   default_input_namespace: rfield
   description: SEIRS Model cpp
-  script: ./build/bin/cppSimpleModel
+  script: ./build/bin/cppSimpleModel --ci
   remote_repo: https://github.com/FAIRDataPipeline/cppSimpleModel.git
 
 register:
