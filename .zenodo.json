@@ -1,0 +1,31 @@
+{
+    "title": "cppSimple Example - Simple model example for the FAIR Data Pipeline",
+    "description": "A C++ Model example to illustrate integration with the FAIR Data Pipeline",
+    "upload_type": "software",
+    "creators": [
+      {
+        "affiliation": "University of Glasgow",
+        "name": "Field, Ryan",
+        "orcid": "0000-0002-4424-9890"
+      },
+      {
+        "affiliation": "United Kingdom Atomic Energy Authority",
+        "name": "Zarebski, Kristian",
+        "orcid": "0000-0002-6773-1049"
+      }
+    ],
+    "access_right": "open",
+    "license": "GPL-3.0+",
+    "related_identifiers": [
+      {
+        "scheme": "url",
+        "identifier": "https://github.com/FAIRDataPipeline/cppSimpleModel",
+        "relation": "isIdenticalTo"
+      }
+    ],
+    "keywords": [
+      "FAIR",
+      "c++",
+      "data"
+    ]
+  }

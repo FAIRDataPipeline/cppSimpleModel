@@ -7,6 +7,11 @@
 ## Installation
 The simpleModel executable can be compile using cmake, the only external dependancy not included is [gnuplot](http://www.gnuplot.info/download.html), gnuplot is required to run the executable and should be installed and the gnuplot executable available in the system path.
 
+### gnuplot
+gnuplot can be installed using the following commands:
+
+###
+
 Compile the executable by running:
 
 ```
@@ -21,30 +26,36 @@ $ cmake --build build --config=Release
 ```
 
 ## Usage
-The executable is located in the build/bin\[/release\] directory
+The executable is located in the `build/bin[/release]` directory
 
 The executable is designed to be run independently using the `--local` flag and taking one parameter:
 
 ## on Unix
 ```
-./cppSimpleModel --local "/users/ryan/cppSimpleModel\data\static_params_SEIRS.csv"
+build/bin/cppSimpleModel --local data/static_params_SEIRS.csv
 ```
 ## or on windows:
 ```
-cppSimpleModel.exe --local "C:\Users\Ryan\Documents\CPP\cppSimpleModel\data\static_params_SEIRS.csv"
+build/bin/release/cppSimpleModel.exe --local data\static_params_SEIRS.csv"
 ```
 
-Or conjuction with the fair cli like so:
+Or conjuction with the [fair cli](#Fair CLI) like so:
 (From a fair cli poetry shell within the repo)
 ## Unix
 ```
 fair init --ci
-fair pull data\seirs_config.yaml
-fair run data\seirs_config.yaml
+fair pull data/seirs_config.yaml
+fair run data/seirs_config.yaml
 ```
 ## Windows
 ```
 fair init --ci
-fair pull data\seirs_config_windows.yaml
-fair run data\seirs_config_windows.yaml
+fair pull data/seirs_config_windows.yaml
+fair run data/seirs_config_windows.yaml
+```
+
+## Fair CLI
+The (FAIR commandline interface)["https://github.com/FAIRDataPipeline/FAIR-CLI"] is available to install using pip:
+```
+pip install fair-cli
 ```
