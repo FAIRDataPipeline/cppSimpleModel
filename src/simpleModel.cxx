@@ -88,14 +88,16 @@ void run_ci(){
     ghc::filesystem::path csv_output_path = datapipeline.link_write(csv_output);
     ghc::filesystem::path figure_output_path = datapipeline.link_write(figure_output);
 
-    std::string figure_output_path_ = FDP::remove_backslash_from_path(figure_output_path.string());
-    figure_output_path_ = std::regex_replace(figure_output_path_, std::regex(std::string("-")), "_");
+    ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
+    std::string figure_output_path_ = "data_store/fig.png";
 
     seirsModel sm = seirsModel(initial_parameters_path.string(),
     1000, 5, 0.999, 0.001, 0, 0);
     sm.run_seirs_model();
     sm.write_to_csv(csv_output_path.string());
     sm.plot_model(figure_output_path_, false);
+
+    ghc::filesystem::copy_file(ghc::filesystem::path(figure_output_path_), figure_output_path);
 
     datapipeline.finalise();
 
