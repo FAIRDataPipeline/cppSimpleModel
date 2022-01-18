@@ -4,3 +4,4 @@ build/
 .bash_profile
 test/data_store/
 .fair
+data_store/
