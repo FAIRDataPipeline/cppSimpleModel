@@ -88,6 +88,8 @@ void run_ci(){
     ghc::filesystem::path csv_output_path = datapipeline.link_write(csv_output);
     ghc::filesystem::path figure_output_path = datapipeline.link_write(figure_output);
 
+    figure_output_path = std::regex_replace(figure_output_path.string(), std::regex(std::string("\\\\")), "/");
+
     seirsModel sm = seirsModel(initial_parameters_path.string(),
     1000, 5, 0.999, 0.001, 0, 0);
     sm.run_seirs_model();
@@ -290,7 +292,7 @@ void seirsModel::plot_model(std::string path, bool show){
         fig.show();
         //plot.show();
     }
-    std::cout << "\nSaving plot to path";
+    std::cout << "\nSaving plot to path" + path;
     fig.save(path);
     //plot.save(path);
 
