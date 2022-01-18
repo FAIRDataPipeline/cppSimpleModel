@@ -8,7 +8,7 @@ IF(WIN32)
     add_definitions(-DNOMINMAX)
 ENDIF()
 
-SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/heads/master.zip" )
+SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/heads/main.zip" )
 
 MESSAGE( STATUS "[FDPAPI]" )
 MESSAGE( STATUS "\tFDPAPI Will be installed." )
@@ -20,7 +20,7 @@ FetchContent_Declare(
     URL ${FDPAPI_URL}
 )
 FetchContent_MakeAvailable(FDPApi)
-SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/main.zip" )
+SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/master.zip" )
 
 MESSAGE( STATUS "[SCIPLOT]" )
 MESSAGE( STATUS "\tSCIPLOT Will be installed." )
