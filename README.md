@@ -1,4 +1,6 @@
 # Simple Model Example for C++
+[![cppSimpleModel](https://github.com/FAIRDataPipeline/cppSimpleModel/actions/workflows/cpp_simple_model.yaml/badge.svg)](https://github.com/FAIRDataPipeline/cppSimpleModel/actions/workflows/cpp_simple_model.yaml)
+[![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-3891A6)](https://opensource.org/licenses/GPL-3.0)
 
 ## Contents
   - [Installation](#installation)
