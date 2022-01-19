@@ -69,20 +69,9 @@ $ cmake --build build --config=Release
 
 ## Usage
 The executable is located in the `build/bin[/release]` directory
-The executable is designed to be run independently using the `--local` flag and taking one parameter:
-### on Unix
-```
-build/bin/cppSimpleModel --local data/static_params_SEIRS.csv
-```
-### or on windows:
-```
-build/bin/release/cppSimpleModel.exe --local data\static_params_SEIRS.csv"
-```
-
-### or conjuction with the [fair cli](#Fair-CLI):
+The executable is designed to be run in conjuction with the [fair cli](#Fair-CLI):
 
 (From a virtual environment within the repo directory)
-
 #### Fair CLI
 The [FAIR commandline interface]("https://github.com/FAIRDataPipeline/FAIR-CLI") is available to install using pip:
 ```
@@ -100,4 +89,14 @@ fair run data/seirs_config.yaml
 fair init --ci
 fair pull data/seirs_config_windows.yaml
 fair run data/seirs_config_windows.yaml
+```
+
+The executable can run standalone and run the SEIRS model taking in a csv with initial parameters: 
+### on Unix
+```
+build/bin/cppSimpleModel data/static_params_SEIRS.csv
+```
+### or on windows:
+```
+build/bin/release/cppSimpleModel.exe data\static_params_SEIRS.csv"
 ```

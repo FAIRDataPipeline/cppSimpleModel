@@ -49,6 +49,6 @@ void run_local(std::string inital_parameters_path,
     std::string csv_output_path,
     std::string figure_output_path);
 
-void run_ci();
+void run_cli();
 
 std::string getEnvVar( std::string const & key );

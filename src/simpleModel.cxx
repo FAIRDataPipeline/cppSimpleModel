@@ -2,38 +2,34 @@
 
 int main(int argc, char** argv) {
     try{
-
-        if(argc > 1)
+        if(argc == 1){
+            run_cli();  
+        }
+        else if(argc > 1)
         {
-            if (std::string(argv[1]).front() != '-') {
-                std::cout << "Please specify a switch see -h";
-                return 1;
-            }
-            else if (std::string(argv[1]).find("h") != std::string::npos) {
-                std::cout << "Usage:\
-                \n --ci\
-                \n --local initial_parameters_path";
-                return 1;
-            }
-            else if (std::string(argv[1]).find("-ci") != std::string::npos) {            
-                run_ci();                
-            }
-            else if (std::string(argv[1]).find("-local") != std::string::npos) {
-                if(argc == 3){                    
-                    ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
-                    run_local(std::string(argv[2]), "data_store/cpp_model_output.csv", "data_store/cpp_figure_output.png");
-                }
-                else if (argc != 5){
-                    std::cout << "Incorrect Number of parameters supplied";
+            if (std::string(argv[1]).substr(0,2) == "--") {
+                if (std::string(argv[1]).find("--h") != std::string::npos) {
+                    std::cout << "Usage:\
+                    \n cppSimpleModel : Run the model using the CLI\
+                    \n cppSimpleModel initial_parameters_path : Run the model with the given initial parameters";
                     return 1;
                 }
-                else {
-                    run_local(std::string(argv[2]), std::string(argv[3]), std::string(argv[4]));
+                else{
+                    std::cout << "Unknown switch supplied see cppSimpleModel --h";
+                    return 1;
                 }
+            }            
+            else if(argc != 2){
+                std::cout << "Incorrect Number of parameters supplied see --h";
+                return 1;
+            }
+            else {
+                ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
+                run_local(std::string(argv[1]), "data_store/cpp_model_output.csv", "data_store/cpp_figure_output.png");
             }
         }
         else {
-            std::cout << "Please specify a switch see -h";
+            std::cout << "Incorrect usage see --h";
             return 1;
         }
     }
@@ -44,6 +40,7 @@ int main(int argc, char** argv) {
     }
     catch (const char* msg) {
         std::cerr << msg << std::endl;
+        return 1;
     }
     catch(...)
     {
@@ -57,6 +54,7 @@ int main(int argc, char** argv) {
 void run_local(std::string initial_parameters_path,
     std::string csv_output_path,
     std::string figure_output_path){
+    FDP::APILogger->info("Running SIERS model");
 
     seirsModel sm = seirsModel(initial_parameters_path,
     1000, 5, 0.999, 0.001, 0, 0);
@@ -65,7 +63,7 @@ void run_local(std::string initial_parameters_path,
     sm.plot_model(figure_output_path, true);
     }
 
-void run_ci(){
+void run_cli(){
     FDP::APILogger->info("Reading token");
     std::string token = getEnvVar("FDP_LOCAL_TOKEN");
     ghc::filesystem::path fdp_path = getEnvVar("FDP_CONFIG_DIR");
@@ -122,8 +120,6 @@ void seirsModel::validate_initial_parameters(std::map<std::string, double> &init
     std::string required_keys = "alpha,beta,inv_gamma,inv_omega,inv_mu,inv_sigma";
     for( std::map<std::string, double>::iterator it = initial_state.begin(); it!= initial_state.end(); it++){
         keys += it->first;
-        //std::cout << "\nValidating key:" + it->first;
-        //std::cout << "\nfound: " + std::to_string(it->second);
     }
     std::istringstream iss(required_keys);
     std::string current_parameter;
