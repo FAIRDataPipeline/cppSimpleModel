@@ -2,16 +2,64 @@
 
 ## Contents
   - [Installation](#installation)
+  - [Compiling](#compiling)
   - [Usage](#usage)
 
+This simple model application runs a simple [SEIRS epidemiology model](https://www.nature.com/articles/s41592-020-0856-2) and registers the metadata of the model run on the FAIR Data Pipeline,
+using the [cppDataPipeline](https://github.com/FAIRDataPipeline/cppDataPipeline) API.
+
 ## Installation
-The simpleModel executable can be compile using cmake, the only external dependancy not included is [gnuplot](http://www.gnuplot.info/download.html), gnuplot is required to run the executable and should be installed and the gnuplot executable available in the system path.
+The simpleModel executable can be compiled using cmake.
+
+The two external dependancies not included are:
+[gnuplot](http://www.gnuplot.info/download.html), gnuplot is required to run the executable and should be installed and the gnuplot executable available in the system path.
+
+And [HDF5](https://support.hdfgroup.org/ftp/HDF5/current/src/), this should be installed and the HDF5_ROOT environment variable defined.
+
+### HDF5
+#### Windows
+HDF5 can be installed for windows 10 64bit windows using a precompiled installer available [here](https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.1/bin/windows/hdf5-1.12.1-Std-win10_64-vs14.zip)
+
+Or by compiling it using the [source code](https://www.hdfgroup.org/downloads/hdf5/source-code/)
+
+The HDF5_ROOT should then be set to the installation directory eg.:`C:\Program Files (x86)\HDF_Group\HDF5\1.12.1`
+
+** Note: The architecture of your compiler should match the installation of HDF5.
+
+#### Linux
+HDF5 can be install on linux through APT:
+```
+sudo apt=get install libhdf5-dev
+```
+
+#### Mac OS
+HDF5 can be installed on mac using homebrew:
+```
+brew install hdf5
+```
 
 ### gnuplot
 gnuplot can be installed using the following commands:
 
-###
+#### Windows
+gnuplot can be installed on windows using chocolatey:
+```
+choco install gnuplot
+```
 
+#### Linux
+gnuplot can be installed on linux using apt:
+```
+sudo apt-get install gnuplot
+```
+
+#### Mac OS
+gnuplot can be installed on mac using homebrew:
+```
+brew install gnuplot
+```
+
+## Compiling
 Compile the executable by running:
 
 ```
@@ -21,7 +69,7 @@ $ cmake --build build
 
 **Important** For multi-config compilers such as Visual Studio xcode or ninja the config type needs to be set to `Release` otherwise the API will not build for example:
 ```
-$ cmake -Bbuild -DFDPAPI_BUILD_TESTS=ON
+$ cmake -Bbuild
 $ cmake --build build --config=Release
 ```
 
