@@ -1,7 +1,7 @@
 # Simple Model Example for C++
 [![cppSimpleModel](https://github.com/FAIRDataPipeline/cppSimpleModel/actions/workflows/cpp_simple_model.yaml/badge.svg)](https://github.com/FAIRDataPipeline/cppSimpleModel/actions/workflows/cpp_simple_model.yaml)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-3891A6)](https://opensource.org/licenses/GPL-3.0)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5879292.svg)](https://doi.org/10.5281/zenodo.5879292)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5878251.svg)](https://doi.org/10.5281/zenodo.5878251)
 
 ## Contents
   - [Installation](#installation)
