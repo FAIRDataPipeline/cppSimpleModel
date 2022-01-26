@@ -242,7 +242,7 @@ void seirsModel::write_to_csv(std::string path){
     std::ofstream writeCSV;
     writeCSV.open(path);
 
-    writeCSV << "time, S, E, I, R\n";
+    writeCSV << "time,S,E,I,R\n";
 
     //std::cout << "\nTime Points: " + std::to_string(time_points_.size());
 
