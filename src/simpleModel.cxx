@@ -203,7 +203,7 @@ void seirsModel::run_seirs_model(){
     I_data_.push_back(I_);
     R_data_.push_back(R_);
 
-    for(int i = 0; i < timesteps_ - 1; i++){
+    for(int i = 0; i < timesteps_; i++){
         double N = S_data_[i] +
             E_data_[i] +
             I_data_[i] +
