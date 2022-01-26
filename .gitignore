@@ -7,3 +7,5 @@ test/data_store/
 data_store/
 venv
 multishow0.plt
+a.out
+cmake_hdf5_test.o
