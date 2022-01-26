@@ -246,7 +246,7 @@ void seirsModel::write_to_csv(std::string path){
 
     //std::cout << "\nTime Points: " + std::to_string(time_points_.size());
 
-    for (int row = 0; row < time_points_.size() - 1; row++){
+    for (int row = 0; row < time_points_.size(); row++){
         writeCSV << time_points_[row];
         writeCSV << ",";
         writeCSV << S_data_[row];
