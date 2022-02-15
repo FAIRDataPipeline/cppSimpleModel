@@ -8,7 +8,7 @@ IF(WIN32)
     add_definitions(-DNOMINMAX)
 ENDIF()
 
-SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/tags/v0.2.1.zip" )
+SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
 
 MESSAGE( STATUS "[FDPAPI]" )
 MESSAGE( STATUS "\tFDPAPI Will be installed." )

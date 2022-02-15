@@ -15,6 +15,11 @@ ELSE()
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Release")
 ENDIF()
 
+if(NOT DEFINED CPPDATAPIPELINEREF)
+    SET(CPPDATAPIPELINEREF "tags/v0.2.1")
+endif()
+
+
 # set the project name
 project(cppSimpleModel
     VERSION 0.1.0
