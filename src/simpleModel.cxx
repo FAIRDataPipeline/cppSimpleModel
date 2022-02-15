@@ -203,7 +203,7 @@ void seirsModel::run_seirs_model(){
     I_data_.push_back(I_);
     R_data_.push_back(R_);
 
-    for(int i = 0; i < timesteps_ - 1; i++){
+    for(int i = 0; i < timesteps_; i++){
         double N = S_data_[i] +
             E_data_[i] +
             I_data_[i] +
@@ -242,11 +242,11 @@ void seirsModel::write_to_csv(std::string path){
     std::ofstream writeCSV;
     writeCSV.open(path);
 
-    writeCSV << "time, S, E, I, R\n";
+    writeCSV << "time,S,E,I,R\n";
 
     //std::cout << "\nTime Points: " + std::to_string(time_points_.size());
 
-    for (int row = 0; row < time_points_.size() - 1; row++){
+    for (int row = 0; row < time_points_.size(); row++){
         writeCSV << time_points_[row];
         writeCSV << ",";
         writeCSV << S_data_[row];
