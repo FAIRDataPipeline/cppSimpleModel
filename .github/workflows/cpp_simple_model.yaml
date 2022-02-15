@@ -21,18 +21,6 @@ jobs:
               sudo apt-get install -y gnuplot
       - name: Install local registry
         run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
-      - name: Checkout FAIRDataPipeline/FAIR-CLI
-        uses: actions/checkout@v2
-        with:
-          repository: FAIRDataPipeline/FAIR-CLI
-          path: FAIR-CLI
-      - name: Move FAIR-CLI
-        run: mv FAIR-CLI ../FAIR-CLI
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true          
       - name: Install Dependencies
         run: |
           sudo apt install -y lcov libjsoncpp-dev curl libcurl4-openssl-dev libyaml-cpp-dev libhdf5-dev
@@ -42,12 +30,10 @@ jobs:
       - name: Run model
         run: |
           cmake --build build
-          cd ../FAIR-CLI
-          poetry install
-          source .venv/bin/activate
-          cd ${{ github.workspace }}
+          python3 -m venv venv
+          source venv/bin/activate
+          pip3 install fair-cli
           fair init --ci
-          fair registry start
           fair pull data/seirs_config.yaml
           fair run data/seirs_config.yaml
   Build_MacOS:
