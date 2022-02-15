@@ -8,6 +8,7 @@
 #include <sciplot/sciplot.hpp>
 #include <ghc/filesystem.hpp>
 #include <fdp/fdp.hxx>
+#include<fdp/utilities/logging.hxx>
 
 class seirsModel {
     public:
