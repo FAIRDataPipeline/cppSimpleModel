@@ -16,13 +16,13 @@ ELSE()
 ENDIF()
 
 if(NOT DEFINED CPPDATAPIPELINEREF)
-    SET(CPPDATAPIPELINEREF "heads/dev")
+    SET(CPPDATAPIPELINEREF "tags/v0.2.2")
 endif()
 
 
 # set the project name
 project(cppSimpleModel
-    VERSION 0.1.0
+    VERSION 0.1.1
     DESCRIPTION "C++ Simple Model for the FAIR Data Pipeline"
     HOMEPAGE_URL "https://github.com/FAIRDataPipeline/cppSimpleModel"
     LANGUAGES CXX C
