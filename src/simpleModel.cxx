@@ -1,5 +1,7 @@
 #include <simpleModel.hxx>
 
+namespace FDP = FairDataPipeline;
+
 int main(int argc, char** argv) {
     try{
         if(argc == 1){
@@ -54,7 +56,7 @@ int main(int argc, char** argv) {
 void run_local(std::string initial_parameters_path,
     std::string csv_output_path,
     std::string figure_output_path){
-    FDP::APILogger->info("Running SIERS model");
+    FDP::logger::get_logger()->info() << "Running SIERS model";
 
     seirsModel sm = seirsModel(initial_parameters_path,
     1000, 5, 0.999, 0.001, 0, 0);
@@ -64,7 +66,7 @@ void run_local(std::string initial_parameters_path,
     }
 
 void run_cli(){
-    FDP::APILogger->info("Reading token");
+    FDP::logger::get_logger()->info() <<"Reading token";
     std::string token = getEnvVar("FDP_LOCAL_TOKEN");
     ghc::filesystem::path fdp_path = getEnvVar("FDP_CONFIG_DIR");
     ghc::filesystem::path config_path = fdp_path / "config.yaml";
@@ -74,19 +76,19 @@ void run_cli(){
         ghc::filesystem::path script_path = fdp_path / "script.sh";
     #endif
 
-    FDP::APILogger->info("FDP Path: {0}", fdp_path.string());
-    FDP::APILogger->info("Config Path: {0}", config_path.string());
-    FDP::APILogger->info("Script Path: {0}", script_path.string());
+    FDP::logger::get_logger()->info() << "FDP Path: {0}" << fdp_path.string();
+    FDP::logger::get_logger()->info() << "Config Path: {0}" << config_path.string();
+    FDP::logger::get_logger()->info() << "Script Path: {0}" << script_path.string();
 
-    FDP::DataPipeline datapipeline = FDP::DataPipeline(config_path.string(), script_path.string(), token);
+    FDP::DataPipeline::sptr datapipeline = FDP::DataPipeline::construct(config_path.string(), script_path.string(), token);
 
     std::string model_parameters = "SEIRS_model/parameters";
     std::string csv_output = "SEIRS_model/results/model_output/cpp";
     std::string figure_output = "SEIRS_model/results/figure/cpp";
 
-    ghc::filesystem::path initial_parameters_path = datapipeline.link_read(model_parameters);
-    ghc::filesystem::path csv_output_path = datapipeline.link_write(csv_output);
-    ghc::filesystem::path figure_output_path = datapipeline.link_write(figure_output);
+    ghc::filesystem::path initial_parameters_path = datapipeline->link_read(model_parameters);
+    ghc::filesystem::path csv_output_path = datapipeline->link_write(csv_output);
+    ghc::filesystem::path figure_output_path = datapipeline->link_write(figure_output);
 
     ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
     std::string figure_output_path_ = "data_store/fig.png";
@@ -99,7 +101,7 @@ void run_cli(){
 
     ghc::filesystem::copy_file(ghc::filesystem::path(figure_output_path_), figure_output_path);
 
-    datapipeline.finalise();
+    datapipeline->finalise();
 
 }
 
@@ -125,7 +127,7 @@ void seirsModel::validate_initial_parameters(std::map<std::string, double> &init
     std::string current_parameter;
     while (getline(iss, current_parameter, ',')){
         if (keys.find(current_parameter) == std::string::npos) {
-            FDP::APILogger->error("Required parameter not found: {0}", current_parameter) ;
+            FDP::logger::get_logger()->error() << "Required parameter not found: {0}" << current_parameter ;
             throw "Required parameter not found: " + current_parameter ;
         }
     }
@@ -139,7 +141,7 @@ void seirsModel::read_initial_parameters(std::string path)
 
     if (!csvFile.is_open())
     {
-        FDP::APILogger->error("Could not open initial parameters from {0}", path);
+        FDP::logger::get_logger()->error() << "Could not open initial parameters from {0}" << path;
         throw "Could not open initial parameters";
     }
 
@@ -166,7 +168,7 @@ void seirsModel::read_initial_parameters(std::string path)
             //std::cout << "\nadded value: " + kv[1] + " to: " + kv[0];
         }
         catch (...) {
-            FDP::APILogger->warn("Warning Could not read parameter on {0}", lineStream);
+            FDP::logger::get_logger()->warn() << "Warning Could not read parameter on {0}" << lineStream;
         }      
     }
 
@@ -238,7 +240,7 @@ void seirsModel::run_seirs_model(){
 }
 
 void seirsModel::write_to_csv(std::string path){
-    FDP::APILogger->info("Writing CSV to: {0}", path);
+    FDP::logger::get_logger()->info() << "Writing CSV to: {0}" << path;
     std::ofstream writeCSV;
     writeCSV.open(path);
 
@@ -260,12 +262,12 @@ void seirsModel::write_to_csv(std::string path){
     }
     writeCSV.close();
 
-    FDP::APILogger->info("CSV Written Succesfuly to: {0}", path);
+    FDP::logger::get_logger()->info() << "CSV Written Succesfuly to: {0}" << path;
 
 }
 
 void seirsModel::plot_model(std::string path, bool show){
-    FDP::APILogger->info("Generating plot");
+    FDP::logger::get_logger()->info() << "Generating plot";
     sciplot::Plot plot;
 
     // Set the x and y labels
@@ -292,7 +294,7 @@ void seirsModel::plot_model(std::string path, bool show){
         fig.show();
         //plot.show();
     }
-    FDP::APILogger->info("Saving plot to path {0}", path);
+    FDP::logger::get_logger()->info() << "Saving plot to path {0}" << path;
     fig.save(path);
     //plot.save(path);
 

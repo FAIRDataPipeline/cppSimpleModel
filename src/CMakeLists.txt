@@ -5,7 +5,8 @@ FILE( GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cxx
 add_executable(cppSimpleModel ${SRC_FILES})
 
 IF(WIN32)
-    add_definitions(-DNOMINMAX)
+    add_definitions(-DNOMINMAX)    
+    add_definitions(-DNOGDI)
 ENDIF()
 
 SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
