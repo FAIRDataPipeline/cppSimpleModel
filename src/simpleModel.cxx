@@ -86,9 +86,9 @@ void run_cli(){
     std::string csv_output = "SEIRS_model/results/model_output/cpp";
     std::string figure_output = "SEIRS_model/results/figure/cpp";
 
-    ghc::filesystem::path initial_parameters_path = datapipeline->link_read(model_parameters);
-    ghc::filesystem::path csv_output_path = datapipeline->link_write(csv_output);
-    ghc::filesystem::path figure_output_path = datapipeline->link_write(figure_output);
+    ghc::filesystem::path initial_parameters_path(datapipeline->link_read(model_parameters));
+    ghc::filesystem::path csv_output_path(datapipeline->link_write(csv_output));
+    ghc::filesystem::path figure_output_path(datapipeline->link_write(figure_output));
 
     ghc::filesystem::create_directories(ghc::filesystem::path("data_store"));
     std::string figure_output_path_ = "data_store/fig.png";
