@@ -1,6 +1,6 @@
 run_metadata:
-  default_input_namespace: rfield
-  default_output_namespace: rfield
+  default_input_namespace: testing
+  default_output_namespace: testing
   description: SEIRS Model cpp
   script: ./build/bin/cppSimpleModel
   remote_repo: https://github.com/FAIRDataPipeline/cppSimpleModel.git
