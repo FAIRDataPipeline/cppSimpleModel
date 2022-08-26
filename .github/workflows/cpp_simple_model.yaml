@@ -33,9 +33,9 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip3 install fair-cli
-          fair init --ci
-          fair pull data/seirs_config.yaml
-          fair run data/seirs_config.yaml
+          fair init --ci --local
+          fair pull --local data/seirs_config.yaml
+          fair run --local data/seirs_config.yaml
   Build_MacOS:
     name: Build MacOS
     runs-on: macOS-latest
