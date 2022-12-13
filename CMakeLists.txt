@@ -22,7 +22,7 @@ endif()
 
 # set the project name
 project(cppSimpleModel
-    VERSION 0.1.1
+    VERSION 0.2.3
     DESCRIPTION "C++ Simple Model for the FAIR Data Pipeline"
     HOMEPAGE_URL "https://github.com/FAIRDataPipeline/cppSimpleModel"
     LANGUAGES CXX C
