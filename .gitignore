@@ -9,3 +9,4 @@ venv
 multishow0.plt
 a.out
 cmake_hdf5_test.o
+venv/

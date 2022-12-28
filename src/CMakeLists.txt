@@ -18,6 +18,7 @@ if(NOT ghc_filesystem_FOUND)
     message( STATUS "\tGHC Will be installed." )
     message( STATUS "\tURL: ${GHC_URL}" )
 
+    include(FetchContent)
     set(GHC_FILESYSTEM_WITH_INSTALL ON CACHE INTERNAL "Create import targets for ghc-filesystem")
     FetchContent_Declare(
         GHC
@@ -27,6 +28,7 @@ if(NOT ghc_filesystem_FOUND)
 
 endif()
 
+find_package(fdpapi)
 if(NOT fdpapi_FOUND)
 
     SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
@@ -61,13 +63,18 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(SCIPLOT)
 
-TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PUBLIC ${sciplot_SOURCE_DIR}/sciplot )
 TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PRIVATE ${CPPSIMPLEMODEL_INCLUDE_DIRS} )
-TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PUBLIC ${fdpapi_SOURCE_DIR}/include )
 
-TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE fdpapi ) 
+# Ensure Compatibility with older version of fdpapi
+if(NOT fdpapi_FOUND)
+    target_include_directories(${CPPSIMPLEMODEL} PRIVATE ${fdpapi_SOURCE_DIR}/include)
+    TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE fdpapi )
+else()
+    TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE fdpapi::fdpapi )
+endif()
+
 TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE sciplot ) 
-target_link_libraries( ${CPPSIMPLEMODEL} PRIVATE ghcFilesystem::ghc_filesystem)
+TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE ghcFilesystem::ghc_filesystem)
 
 # Install the libraries
 INSTALL( TARGETS ${CPPSIMPLEMODEL} 
