@@ -9,18 +9,40 @@ IF(WIN32)
     add_definitions(-DNOGDI)
 ENDIF()
 
-SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
+find_package(ghc_filesystem)
+if(NOT ghc_filesystem_FOUND)
 
-MESSAGE( STATUS "[FDPAPI]" )
-MESSAGE( STATUS "\tFDPAPI Will be installed." )
-MESSAGE( STATUS "\tURL: ${FDPAPI_URL}" )
+    set(GHC_URL "https://github.com/gulrak/filesystem/archive/refs/tags/v1.5.10.zip")
 
-include(FetchContent)
-FetchContent_Declare(
-    FDPApi
-    URL ${FDPAPI_URL}
-)
-FetchContent_MakeAvailable(FDPApi)
+    message( STATUS "[GHC]" )
+    message( STATUS "\tGHC Will be installed." )
+    message( STATUS "\tURL: ${GHC_URL}" )
+
+    set(GHC_FILESYSTEM_WITH_INSTALL ON CACHE INTERNAL "Create import targets for ghc-filesystem")
+    FetchContent_Declare(
+        GHC
+        URL ${GHC_URL}
+    )
+    FetchContent_MakeAvailable(GHC)
+
+endif()
+
+if(NOT fdpapi_FOUND)
+
+    SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
+
+    MESSAGE( STATUS "[FDPAPI]" )
+    MESSAGE( STATUS "\tFDPAPI Will be installed." )
+    MESSAGE( STATUS "\tURL: ${FDPAPI_URL}" )
+
+    include(FetchContent)
+    FetchContent_Declare(
+        FDPApi
+        URL ${FDPAPI_URL}
+    )
+    FetchContent_MakeAvailable(FDPApi)
+endif()
+
 SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/master.zip" )
 
 MESSAGE( STATUS "[SCIPLOT]" )
@@ -43,8 +65,9 @@ TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PUBLIC ${sciplot_SOURCE_DIR}/scipl
 TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PRIVATE ${CPPSIMPLEMODEL_INCLUDE_DIRS} )
 TARGET_INCLUDE_DIRECTORIES( ${CPPSIMPLEMODEL} PUBLIC ${fdpapi_SOURCE_DIR}/include )
 
-TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PUBLIC fdpapi ) 
-TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PUBLIC sciplot ) 
+TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE fdpapi ) 
+TARGET_LINK_LIBRARIES( ${CPPSIMPLEMODEL} PRIVATE sciplot ) 
+target_link_libraries( ${CPPSIMPLEMODEL} PRIVATE ghcFilesystem::ghc_filesystem)
 
 # Install the libraries
 INSTALL( TARGETS ${CPPSIMPLEMODEL} 
