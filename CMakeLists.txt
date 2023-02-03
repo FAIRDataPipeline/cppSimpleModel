@@ -28,6 +28,13 @@ project(cppSimpleModel
     LANGUAGES CXX C
 )
 
+# Option to prevent FetchContent, and force usage of pre-installed library
+option(
+    FDPAPI_NO_FETCHCONTENT
+    "If set, compilation will fail unless a pre-installed FDPAPI library is found"
+    OFF
+)
+
 set( CPPSIMPLEMODEL cppSimpleModel )
 
 # Set Output Directories to avoid issues on multi release compilers
