@@ -28,21 +28,26 @@ if(NOT ghc_filesystem_FOUND)
 
 endif()
 
-find_package(fdpapi)
-if(NOT fdpapi_FOUND)
+if(FDPAPI_NO_FETCHCONTENT)
+    find_package(fdpapi REQUIRED)
+    message(STATUS "fdpapi found")
+else()
+    find_package(fdpapi)
+    if(NOT fdpapi_FOUND)
 
-    SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
+        SET( FDPAPI_URL "https://github.com/FAIRDataPipeline/cppDataPipeline/archive/refs/${CPPDATAPIPELINEREF}.zip" )
 
-    MESSAGE( STATUS "[FDPAPI]" )
-    MESSAGE( STATUS "\tFDPAPI Will be installed." )
-    MESSAGE( STATUS "\tURL: ${FDPAPI_URL}" )
+        MESSAGE( STATUS "[FDPAPI]" )
+        MESSAGE( STATUS "\tFDPAPI Will be installed." )
+        MESSAGE( STATUS "\tURL: ${FDPAPI_URL}" )
 
-    include(FetchContent)
-    FetchContent_Declare(
-        FDPApi
-        URL ${FDPAPI_URL}
-    )
-    FetchContent_MakeAvailable(FDPApi)
+        include(FetchContent)
+        FetchContent_Declare(
+            FDPApi
+            URL ${FDPAPI_URL}
+        )
+        FetchContent_MakeAvailable(FDPApi)
+    endif()
 endif()
 
 SET( SCIPLOT_URL "https://github.com/RyanJField/sciplot/archive/refs/heads/master.zip" )
