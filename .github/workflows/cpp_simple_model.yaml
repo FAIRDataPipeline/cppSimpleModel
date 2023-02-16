@@ -23,7 +23,7 @@ jobs:
         run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
       - name: Install Dependencies
         run: |
-          sudo apt install -y lcov libjsoncpp-dev curl libcurl4-openssl-dev libyaml-cpp-dev libhdf5-dev
+          sudo apt install -y lcov curl libcurl4-openssl-dev libhdf5-dev
       - name: Configure Library
         run: |
           cmake -Bbuild
