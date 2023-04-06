@@ -1,6 +1,6 @@
 name: cppSimpleModel
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   Build_Ubuntu:
