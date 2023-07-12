@@ -60,13 +60,13 @@ pip install fair-cli
 Once installed the model can be run using the following:
 ### Unix
 ```
-fair init --ci
+fair init
 fair pull data/seirs_config.yaml
 fair run data/seirs_config.yaml
 ```
 ### Windows
 ```
-fair init --ci
+fair init
 fair pull data/seirs_config_windows.yaml
 fair run data/seirs_config_windows.yaml
 ```
