@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     }
     catch(...)
     {
-        std::cerr << "somthing went wrong";
+        std::cerr << "something went wrong";
         return 1;
     }
 
