@@ -9,18 +9,16 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: 
-          python-version: "3.9"
+          python-version: "3.10"
           architecture: "x64"
       - name: Install graphviz
         run:  |
               sudo apt update
               sudo apt-get install graphviz
               sudo apt-get install -y gnuplot
-      - name: Install local registry
-        run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
       - name: Install Dependencies
         run: |
           sudo apt install -y lcov libjsoncpp-dev curl libcurl4-openssl-dev libyaml-cpp-dev libhdf5-dev
@@ -33,6 +31,7 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip3 install fair-cli
+          fair registry install
           fair init --ci --local
           fair pull --local data/seirs_config.yaml
           fair run --local data/seirs_config.yaml
@@ -42,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: Install Dependencies
         run: |
           brew install cmake
@@ -61,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Install Dependencies
         run: |
